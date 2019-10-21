@@ -9,10 +9,13 @@ function App() {
     <Router>
     <div className="App">
 
-      <h1>Top Nine</h1>
+      <h1 className= "top">Top Nine</h1>
 
     <ul>
 
+    <li>
+      <Link to ="/">Home</Link>
+      </li>
       <li>
       <Link to ="/login">Login</Link>
       </li>
