@@ -1,60 +1,63 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-
+import AddTop from './AddTop';
 
 const initialTop = {
-    item : {
-        name: '',
-        about: ''
-    }
-};
+    users: 1,
+    list_name: "ones",
+    items: [{
+        name: 'one',
+        desc: 'one'
+    }]
+}
 
 const TopList = ({ items, updateItems }) => {
+    
     const [editing, setEditing] = useState(false);
     const [itemToEdit, setItemToEdit] = useState(initialTop);
 
-    const editItem = item => {
+    const editItem = items => {
         setEditing(true);
-        setItemToEdit(item);
+        setItemToEdit(items);
     };
 
     const saveEdit = e => {
         e.preventDefault();
 
-        axiosWithAuth().put(`item/${itemToEdit.id}`, itemToEdit)
+        axiosWithAuth().put(`https://buildweek--top-nine.herokuapp.com/api/tops/${itemToEdit.id}`, itemToEdit)
             .then(res => {
-                updateItems(items.map(item =>
-                    item.id === itemToEdit.id ? res.data : item))
+                updateItems(items.map(items =>
+                    items.id === itemToEdit.id ? res.data : items))
                     setEditing(false)
             })
             .catch(err => console.log("PUT FAILED", err))
     };
 
-    const deleteItem = item => {
+    const deleteItem = items => {
 
-        axiosWithAuth().delete(`items/${item.id}`)
+        axiosWithAuth().delete(`https://buildweek--top-nine.herokuapp.com/api/tops/${items.id}`)
             .then(res => updateItems(items.filter(option =>
-                option.id !== item.id)))
+                option.id !== items.id)))
             .catch(err => console.log("DELETE FAILED", err))
     };
 
     return (
         <div>
-            <p>Edit Your Top Nine!</p>
+            <p>Your Top Nine!</p>
 
             <ul>
-                {items.map(item => (
+                {items.map(items => (
                     <li 
-                    key = {item.item} 
-                    onClick = {() => editItem(item)}>
+                    key = {items.items} 
+                    onClick = {() => editItem(items)}>
 
                         <span>
                             <span
                                 className = "delete"
-                                onClick = {() => deleteItem(item)}>
+                                onClick = {() => deleteItem(items)}>
                                     DELETE
                                 </span>{" "}
-                            {item.item}
+                            {items.items}
                         </span>
 
                         <div
@@ -73,13 +76,13 @@ const TopList = ({ items, updateItems }) => {
                             Option Name:
                                 <input
                                     onChange = {e =>
-                                        setItemToEdit({...itemToEdit, name: e.target.value})
+                                        setItemToEdit({...itemToEdit, items: e.target.value})
                                     }
-                                    value = {itemToEdit.name}
+                                    value = {itemToEdit.items}
                                 />
                         </label>
 
-                        <label>
+                        {/* <label>
                             About:
                                 <input
                                     onChange = {e =>
@@ -89,7 +92,7 @@ const TopList = ({ items, updateItems }) => {
                                     }
                                     value = {itemToEdit.about}
                                 />
-                        </label>
+                        </label> */}
 
                     <div className = "bottom">
                         <button type = "submit">Save Changes</button>
@@ -97,6 +100,7 @@ const TopList = ({ items, updateItems }) => {
                     </div>
                 </form>
             )}
+            <AddTop updateItems = {updateItems}/>
         </div>
     )
 }

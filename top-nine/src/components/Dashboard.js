@@ -10,8 +10,10 @@ const Dashboard = () => {
 
     useEffect(() => {
         axiosWithAuth()
-        .get("items")
-        .then(res => setTopNine(res.data))
+        .get('https://buildweek--top-nine.herokuapp.com/api/tops')
+        .then(res => console.log(res))
+            
+            // setTopNine(res.data))
         .catch(err => console.log(err.response))
     }, [])
 

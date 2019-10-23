@@ -20,7 +20,7 @@ function App() {
       <Route exact path='/signup' component={SignUp} />
       <Route exact path='/myprofile' component={Profile} />
 
-      <PrivateRoute exact path = 'homepage/dashboard' component = {Dashboard} />
+      <PrivateRoute exact path = '/dashboard' component = {Dashboard} />
       </Switch>
     </div>
     </Router>
