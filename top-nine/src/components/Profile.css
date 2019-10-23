@@ -1,0 +1,33 @@
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    margin: 10px auto;
+}
+
+.profile-stuff {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    margin-left: 80px;
+    text-align: start;
+    margin-top: 40px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.profile-stuff h3 {
+    font-size: 20px;
+}
+
+.profile-stuff span {
+    color: blue;
+}
+
+.dummy-img {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}
