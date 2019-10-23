@@ -6,6 +6,7 @@ import PrivateRoute from './components/PrivateRoute';
 
 import Login from './components/Login';
 import Header from './components/Header';
+import Profile from './components/Profile';
 import Dashboard from './components/Dashboard';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Switch>
       <Route exact path ="/login" component = {Login} />
       <Route exact path='/signup' component={SignUp} />
+      <Route exact path='/myprofile' component={Profile} />
 
       <PrivateRoute exact path = 'homepage/dashboard' component = {Dashboard} />
       </Switch>
