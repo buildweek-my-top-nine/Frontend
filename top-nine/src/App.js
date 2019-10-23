@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import SignUp from "./components/SignUp";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";

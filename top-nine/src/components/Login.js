@@ -22,11 +22,11 @@ const Login = (props) => {
         e.preventDefault();
 
         axiosWithAuth()
-        .post()
+        .post('https://buildweek--top-nine.herokuapp.com/api/login', credentials)
         .then(response => {
             console.log(response);
             localStorage.setItem('token', response.data.payload);
-            props.history.push();
+            props.history.push('/myprofile');
         })
         .catch(error => {
             console.log(error);

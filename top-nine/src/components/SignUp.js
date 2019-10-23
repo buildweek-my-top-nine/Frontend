@@ -1,109 +1,61 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-import axios from 'axios';
+import * as Yup from "yup";
+import {axiosWithAuth} from "../utils/axiosWithAuth";
+import "../Signup.css";
 
-import '../Signup.css';
-
-function SignUp({touched, errors}) {
-
+function SignUp() {
+  
     return (
-        <div className="sign-container">
-            <div className='sign-up'>
-                <h1>Top 9 Sign Up</h1>
-
-                <Form className="field">
-                    <div>
-                        <label>Username</label>
-                        <Field
-                            className="control"
-                            name="username"
-                            typer="username"
-                            autoComplete="off"
-                        />
-                        <br/>
-                        <h3>{touched.username && errors.username}</h3>
-                    </div>
-
-                    <div>
-                        <label>Full Name</label>
-                        <Field
-                            className="control"
-                            name="full_name"
-                            typer="text"
-                            autoComplete="off"
-                        />
-                        <br/>
-                        <h3>{touched.full_name && errors.full_name}</h3>
-                    </div>
-
-                    <div>
-                        <label>Email</label>
-                        <Field
-                            className="control"
-                            name="email"
-                            type="email"
-                            autoComplete="off"
-                        />
-                        <br/>
-                        <h3>{touched.email && errors.email}</h3>
-                    </div>
-
-                    <div>
-                        <label>Password</label>
-                        <Field
-                            className="control"
-                            name="password"
-                            type="password"
-                            autoComplete="off"
-                        />
-                        <br/>
-                        <h3>{touched.password && errors.password}</h3>
-                    </div>
-                    <button type="submit" className="signButton">Join!</button>
-                </Form>
+            <div className="sign-container">
+                <div className="sign-up">
+                    <h1>Top 9 Sign Up</h1>
+                </div>
+              <Form className="field">
+                <Field className="control" type="text" name="username" placeholder="Username"/>
+                <Field className="control" type="text" name="email" placeholder="Email"/>
+                <Field className="control" type="text" name="name" placeholder="Name"/>
+                <Field className="control" type="text" name="password" placeholder="Password"/>
+                <button type="submit" className="signButton">Submit!</button>
+              </Form>
             </div>
-        </div>
-    )
+    );
 }
 
-export default withFormik({
-
-    mapPropsToValues() {
+const FormikSignUpForm = withFormik({
+    mapPropsToValues({ username, email, name, password}) {
         return {
-            username: '',
-            email: '',
-            password: '',
+            username: username || "",
+            email: email || "",
+            name: name || "",
+            password: password || ""
         };
     },
 
     validationSchema: Yup.object().shape({
         username: Yup.string()
-            .min(3)
-            .required(),
-        full_name: Yup.string()
-            .email()
-            .required(),
+            // .username()
+            .required("Username is required"),
         email: Yup.string()
-            .email()
-            .required(),
+          .email()
+          .required("Email is required"),
+        name: Yup.string()
+            // .name()
+            .required("Name is required"),
         password: Yup.string()
-            .min(6)
-            .required()  
-    }),
-
-    handleSubmit(values, formikBag){
+          .min(6, "Password must be 6 chararcters or longer")
+          .required("Password is required")
+      }),
+    handleSubmit(values, formikBag) {
+        console.log(values);
         
-        const url = '#'
-
-        axios
-            .post(url, values)
-            .then(response => {
-                console.log(response)
-                formikBag.props.history.push("/users/login");
-            })
-            .catch(e => {
-                console.log(e)
+          axiosWithAuth()
+            .post("/user", values)
+            .then(res => {
+              console.log(res);
+              formikBag.props.history.push("/login");
             });
-    }
-})(SignUp)
+      }
+    })(SignUp);
+
+export default FormikSignUpForm;
