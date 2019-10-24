@@ -76,6 +76,7 @@
 
 
 import React from 'react';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 const axios = require('axios');
 const oauth = require('axios-oauth-client');
 
@@ -115,11 +116,16 @@ export default class Login extends React.Component {
       }
 
     })
-      .then(res => {
+     
 
+    .then(res => {
         localStorage.setItem('token', res.data.access_token);
         this.props.history.push('/dashboard');
-
+      })
+      .then(res => {
+        axiosWithAuth().get('/users/getuserinfo')
+        
+        .then(res => console.log(res))
       })
       .catch(err => console.dir(err));
 
