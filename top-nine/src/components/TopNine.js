@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import AddTop from './AddTop';
+import axios from 'axios';
 
 const initialTop = {
    
@@ -10,10 +11,15 @@ const initialTop = {
 
 }
 
-const TopList = ({ items, updateItems }) => {
+const TopList = ({ items, updateItems, GetData }) => {
     
     const [editing, setEditing] = useState(false);
     const [itemToEdit, setItemToEdit] = useState(initialTop);
+
+    useEffect((props) => {
+       return GetData();
+    })
+
 
     const editItem = items => {
         setEditing(true);
@@ -23,20 +29,22 @@ const TopList = ({ items, updateItems }) => {
     const saveEdit = e => {
         e.preventDefault();
 
-        // axiosWithAuth().put(`/topnine/interests/${itemToEdit.id}`, itemToEdit)
-        //     .then(res => {
+        axiosWithAuth().put(`/topnine/interest/${itemToEdit.interestid}`, itemToEdit)
+            .then(res => {
+                
                 updateItems(items.map(interestname =>
-                    interestname.interestid === itemToEdit.interestid ? itemToEdit : setItemToEdit))
+                    interestname.interestid === itemToEdit.interestid ? res.data : interestname))
                     setEditing(false)
-            // })
-            // .catch(err => console.log("PUT FAILED", err))
+            })
+            .catch(err => console.log("PUT FAILED", err))
     };
 
     const deleteItem = items => {
-
-        axiosWithAuth().delete(`/topnine/interests/${items.interestid}`)
+        
+        axiosWithAuth().delete(`/topnine/interest/${items.interestid}`)
             .then(res => updateItems(items.filter(interestname =>
                 interestname.interestid !== interestname.interestid)))
+            // .then(res => console.log(res))
             .catch(err => console.log("DELETE FAILED", err))
     };
 
@@ -111,7 +119,7 @@ const TopList = ({ items, updateItems }) => {
                     </div>
                 </form>
             )} 
-            <AddTop updateItems = {updateItems}/>
+            <AddTop updateItems = {updateItems} GetData = {GetData}/>
         </div>
     )
 }

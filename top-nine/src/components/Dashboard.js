@@ -15,23 +15,28 @@ const Dashboard = () => {
     }
     ]);
  
-
-    // useEffect(() => {
-    //     // const id = localStorage.getItem("id")
-    //     axiosWithAuth()
-    //     .get('/topnine/interests')
-    //     .then(res => 
+    const GetData = () => {
+        axiosWithAuth()
+        .get('/topnine/interests')
+        .then(res => 
           
-    //         // console.log(res.data))
-    //         setTopNine(res.data))
-    //     .catch(err => console.log(err.response))
-    // }, [])
+            // console.log(res.data))
+            setTopNine(res.data))
+        .catch(err => console.log(err.response))
+    }
+
+    useEffect(() => {
+        // const id = localStorage.getItem("id")
+        return
+            GetData();
+        
+    }, [GetData])
 
     return(
         
         <div>
             {/* {console.log(topNine)} */}
-        <TopList items = {topNine}  updateItems = {setTopNine} />
+        <TopList items = {topNine} GetData = {GetData} updateItems = {setTopNine} />
       </div>
     );
 };
