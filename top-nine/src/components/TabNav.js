@@ -13,8 +13,6 @@ const createLabel = (iconName, labelText) => (
 
 const welcomeLabel = createLabel("home", "My Profile");
 const characterLabel = createLabel("user", "Dashboard");
-const signupLabel = createLabel("thumbs up", "Sign Up");
-const loginLabel = createLabel("sign-in", "Login");
 const logoutLabel = createLabel("sign-out", "Log Out");
 
 const panes = [
@@ -29,26 +27,6 @@ const panes = [
         to={`/dashboard`}
         content={characterLabel}
       />
-    )
-  },
-  {
-    menuItem: (
-      <Menu.Item
-        key="locations"
-        as={Nav}
-        to={`/signup`}
-        content={signupLabel}
-      />
-    )
-  },
-  {
-    menuItem: (
-        <Menu.Item
-            key="logs"
-            as={Nav}
-            to={`/login`}
-            content={loginLabel}
-        />
     )
   },
   {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import "../Signup.css";
 
 
 
@@ -38,29 +39,35 @@ const Login = (props) => {
     return (
 
         <>
-        <h1>Please Sign In!</h1>
+        <div className="sign-container">
+            <div className="sign-up">
+                <h1>Please Log In!</h1>
 
-        <form onSubmit = {handleSubmit}>
+                <form className="field" onSubmit = {handleSubmit}>
 
-            <input
-                type = "text"
-                name = "username"
-                placeholder = "Username"
-                onChange = {handleChange}
-                value = {credentials.username}
-            />
+                    <input
+                        type = "text"
+                        name = "username"
+                        placeholder = "Username"
+                        onChange = {handleChange}
+                        className = "control"
+                        value = {credentials.username}
+                    />
 
-            <input
-                type = "password"
-                name = "password"
-                placeholder = "Password"
-                onChange = {handleChange}
-                value = {credentials.password}
-            />
+                    <input
+                        type = "password"
+                        name = "password"
+                        placeholder = "Password"
+                        onChange = {handleChange}
+                        className = "control"
+                        value = {credentials.password}
+                    />
 
-            <button>Submit</button>
+                    <button className="signButton">Submit</button>
 
-        </form>
+                </form>
+            </div>
+        </div>
 
 
         </>
