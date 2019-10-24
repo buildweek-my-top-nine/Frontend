@@ -14,7 +14,7 @@ function SignUp() {
               <Form className="field">
                 <Field className="control" type="text" name="username" placeholder="Username"/>
                 <Field className="control" type="text" name="primaryemail" placeholder="Email"/>
-                <Field className="control" type="text" name="password" placeholder="Password"/>
+                <Field className="control" type="password" name="password" placeholder="Password"/>
                 <button type="submit" className="signButton">Submit!</button>
               </Form>
             </div>

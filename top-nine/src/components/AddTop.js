@@ -3,20 +3,24 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 
 
-const AddTop = ({ updateItems }) => {
+const AddTop = ({ updateItems, GetData }) => {
 
     const [items, setItems] = useState({
         
         interestid: Date.now(),
         interestname: '',
-        description: ''
-
+        description: '',
+        category: {
+            categoryid: 2
+            }
     })
 
     const handleSubmit = e => {
         e.preventDefault();
-        axiosWithAuth().post('/topnine/catagories/category/add', items)
-            .then(res => updateItems(res.data))
+        axiosWithAuth().post('/topnine/interests/interest/add', items)
+            .then(res => {
+                console.log(res.data);  
+            return GetData()})
             .catch(err => console.log("FAILED POST", err))
         
         setItems({

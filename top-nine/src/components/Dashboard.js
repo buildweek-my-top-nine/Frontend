@@ -5,11 +5,17 @@ import TopList from './TopNine';
 
 
 const Dashboard = () => {
-    const [topNine, setTopNine] = useState([]);
+    const [topNine, setTopNine] = useState([
+        {
+   
+            interestid: 0,
+            interestname: 'Test Interest',
+            description: 'Test Description'
+    
+    }
+    ]);
  
-
-    useEffect(() => {
-        // const id = localStorage.getItem("id")
+    const GetData = () => {
         axiosWithAuth()
         .get('/topnine/interests')
         .then(res => 
@@ -17,13 +23,20 @@ const Dashboard = () => {
             // console.log(res.data))
             setTopNine(res.data))
         .catch(err => console.log(err.response))
-    }, [])
+    }
+
+    useEffect(() => {
+        // const id = localStorage.getItem("id")
+        return
+            GetData();
+        
+    }, [GetData])
 
     return(
         
         <div>
             {/* {console.log(topNine)} */}
-        <TopList items = {topNine}  updateItems = {setTopNine} />
+        <TopList items = {topNine} GetData = {GetData} updateItems = {setTopNine} />
       </div>
     );
 };
