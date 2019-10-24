@@ -6,8 +6,7 @@ export const axiosWithAuth = () => {
   return axios.create({
     baseURL: "https://cameron-mytopnine.herokuapp.com",
     headers: {
-      Authorization: token,
-      
+      Authorization: `Bearer ${localStorage.getItem('token')}`
     }
   });
 };
