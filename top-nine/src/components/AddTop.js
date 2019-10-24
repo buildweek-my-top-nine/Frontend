@@ -6,41 +6,51 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 const AddTop = ({ updateItems }) => {
 
     const [items, setItems] = useState({
-        users: Date.now(),
-        list_name: "",
-        items: [
-            {
-            name: '',
-            desc: ''}
-        ]
+        
+        interestid: Date.now(),
+        interestname: '',
+        description: ''
+
     })
 
     const handleSubmit = e => {
         e.preventDefault();
-        axiosWithAuth.post('https://buildweek--top-nine.herokuapp.com/api/tops', items)
+        axiosWithAuth.post('/topnine/interests/interest/add', items)
             .then(res => updateItems(res.data))
             .catch(err => console.log("FAILED POST", err))
         
         setItems({
-            users: [''],
-            list_name: [''],
-            items : ['']
+            
+            interestid: Date.now(),
+            interestname: '',
+            description: ''
         })
     }
 
     return (
         <form onSubmit = {handleSubmit}>
 
-            <h2>Add New Item!</h2>
+            <h3>Add New Item!</h3>
 
                 <label>
-                    Name of Item:
+                    Name of Interest:
 
                     <input
                         onChange = {e =>
-                            setItems({...items, items: e.target.value})
+                            setItems({...items, interestname: e.target.value})
                         }
-                        value = {items.items}
+                        value = {items.interestname}
+                    />
+                </label>
+
+                <label>
+                    Desciption of Interest:
+
+                    <input
+                        onChange = {e =>
+                            setItems({...items, description: e.target.value})
+                        }
+                        value = {items.description}
                     />
                 </label>
 

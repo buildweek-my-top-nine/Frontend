@@ -3,12 +3,11 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 import AddTop from './AddTop';
 
 const initialTop = {
-    users: 1,
-    list_name: "ones",
-    items: [{
-        name: 'one',
-        desc: 'one'
-    }]
+   
+        interestid: 0,
+        interestname: 'one',
+        description: 'one'
+
 }
 
 const TopList = ({ items, updateItems }) => {
@@ -24,10 +23,10 @@ const TopList = ({ items, updateItems }) => {
     const saveEdit = e => {
         e.preventDefault();
 
-        axiosWithAuth().put(`https://buildweek--top-nine.herokuapp.com/api/tops/${itemToEdit.id}`, itemToEdit)
+        axiosWithAuth().put(`/topnine/interests/${itemToEdit.id}`, itemToEdit)
             .then(res => {
-                updateItems(items.map(items =>
-                    items.id === itemToEdit.id ? res.data : items))
+                updateItems(items.map(interestname =>
+                    interestname.interestid === itemToEdit.interestid ? res.data : interestname))
                     setEditing(false)
             })
             .catch(err => console.log("PUT FAILED", err))
@@ -35,37 +34,45 @@ const TopList = ({ items, updateItems }) => {
 
     const deleteItem = items => {
 
-        axiosWithAuth().delete(`https://buildweek--top-nine.herokuapp.com/api/tops/${items.id}`)
-            .then(res => updateItems(items.filter(option =>
-                option.id !== items.id)))
+        axiosWithAuth().delete(`/topnine/interests/${items.interestid}`)
+            .then(res => updateItems(items.filter(interestname =>
+                interestname.interestid !== interestname.interestid)))
             .catch(err => console.log("DELETE FAILED", err))
     };
 
     return (
+        
         <div>
-            <p>Your Top Nine!</p>
+            
+            <h1>Your Top Nine!</h1>
 
-            <ul>
-                {items.map(items => (
-                    <li 
-                    key = {items.items} 
-                    onClick = {() => editItem(items)}>
-
+             {/* <ul> */}
+                {items.map(item => (
+                    // console.log(item.interestname))
+                    <div 
+                    key = {item.interestid} 
+                    onClick = {() => editItem(item)}>
+                        <div>
+                        <h3>{item.interestname}</h3>
+                        <p>{item.description}</p>
+                        </div>
                         <span>
-                            <span
+                            <button
                                 className = "delete"
-                                onClick = {() => deleteItem(items)}>
+                                onClick = {() => deleteItem(item)}>
                                     DELETE
-                                </span>{" "}
-                            {items.items}
+                                </button>{" "}
+                            {item.item}
                         </span>
-
-                        <div
-                            className = "item-box"
-                        />
-                    </li>
+                        
+                {/* //         <div
+                //             className = "item-box"
+                            
+                //             style = {{title: item.interestname}}
+                //         /> */}
+                    </div>
                 ))}
-            </ul>
+            {/* </ul> */}
 
             {editing && (
 
@@ -76,30 +83,34 @@ const TopList = ({ items, updateItems }) => {
                             Option Name:
                                 <input
                                     onChange = {e =>
-                                        setItemToEdit({...itemToEdit, items: e.target.value})
+                                        setItemToEdit({...itemToEdit, 
+                                            
+                                            interestname: e.target.value,
+                                           
+                                        })
                                     }
-                                    value = {itemToEdit.items}
+                                    value = {itemToEdit.interestname}
                                 />
-                        </label>
+                        </label> 
 
-                        {/* <label>
+                         <label>
                             About:
                                 <input
                                     onChange = {e =>
                                         setItemToEdit({
                                             ...itemToEdit,
-                                            about: e.target.value})
+                                            description: e.target.value})
                                     }
-                                    value = {itemToEdit.about}
+                                    value = {itemToEdit.description}
                                 />
-                        </label> */}
+                        </label> 
 
-                    <div className = "bottom">
+                     <div className = "bottom">
                         <button type = "submit">Save Changes</button>
                         <button onClick = {() => setEditing(false)}>Cancel</button>
                     </div>
                 </form>
-            )}
+            )} 
             <AddTop updateItems = {updateItems}/>
         </div>
     )
