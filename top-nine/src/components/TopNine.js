@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import AddTop from './AddTop';
 import axios from 'axios';
+import styled from 'styled-components';
 
 const initialTop = {
    
@@ -52,7 +53,7 @@ const TopList = ({ items, updateItems, GetData }) => {
         
         <div>
             
-            <h1>Your Top Nine!</h1>
+            <h1>Here's a List of Top Nines!</h1>
 
              {/* <ul> */}
                 {items.map(item => (
@@ -60,16 +61,16 @@ const TopList = ({ items, updateItems, GetData }) => {
                     <div 
                     key = {item.interestid} 
                     onClick = {() => editItem(item)}>
-                        <div>
+                        <Card>
                         <h3>{item.interestname}</h3>
                         <p>{item.description}</p>
-                        </div>
+                        </Card>
                         <span>
-                            <button
+                            <Delete
                                 className = "delete"
                                 onClick = {() => deleteItem(item)}>
                                     DELETE
-                                </button>{" "}
+                                </Delete>{" "}
                             {item.item}
                         </span>
                         
@@ -125,3 +126,11 @@ const TopList = ({ items, updateItems, GetData }) => {
 }
 
 export default TopList;
+
+const Card = styled.div`
+    margin-bottom: 2%;
+`
+
+const Delete = styled.button`
+    margin-bottom: 2%;
+`

@@ -136,15 +136,20 @@ export default class Login extends React.Component {
   render() {
 
     return (
+        
+    <div className="sign-container">
+      <div className="sign-up">
+      <h1>Please Log In!</h1>
+      <form onSubmit={this.handleSubmit} className="field">
 
-      <form onSubmit={this.handleSubmit}>
-
-        <input type="text" name="username" value={this.state.username} onChange={this.handleChange} required />
-        <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-        <button>Submit</button>
+        <input type="text" name="username" value={this.state.username} onChange={this.handleChange} className = "control" required />
+        <input type="password" name="password" value={this.state.password} onChange={this.handleChange} className = "control" required />
+        <button className="signButton">Submit</button>
 
       </form>
-
+      </div>
+       </div>
+    
     );
 
   }
