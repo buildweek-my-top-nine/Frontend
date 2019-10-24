@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Profile.css'
 import Header from "./Header";
 import TopNineCard from "./TopNineCard";
+import Profilecard from "./Profilecard";
 
-export default function Profile(props) {
+export default function Profile(items) {
     return (
-        <>
-        <Header/>
-        <div className="profile-image">
-        <div className="profile-container">
-            <div className="profile-header">
-                <h1>My Top Nine</h1>
-            </div>
-            <div className="profile-stuff">
-                <img className="dummy-img" src="https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Bob_at_Easel.jpg/220px-Bob_at_Easel.jpg"/>
-                <h3>Username: <span>{props.username}</span></h3>
-                <h3>Email: <span>{props.email}</span></h3>
-            </div>
+        <div>
+            <Header/>
+            <h1>Your Top Nine!</h1>
+
+             {/* <ul> */}
+                {items.map((item, index) => {
+                    // console.log(item.interestname))
+                    return(
+                    <Profilecard key = {index}
+                        username = {item.username}
+                        email = {item.primaryemail}
+                    />
+                    )
+                })}
         </div>
-        <TopNineCard/>
-        </div>
-        </>
+        
     )
 }

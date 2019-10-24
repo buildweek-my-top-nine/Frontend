@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route } from 'react-router-dom';
 
 import Header from "./Header";
-import {Profilecard} from "./Profilecard";
+import Profilecard from "./Profilecard";
 import Dashboard  from "./Dashboard";
 
 import { useContext } from "react";
