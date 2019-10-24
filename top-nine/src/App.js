@@ -20,7 +20,7 @@ function App() {
 
   const getNine = () => {
     axiosWithAuth()
-      .get(`/user`)
+      .get("https://cameron-mytopnine.herokuapp.com/getuserinfo")
       .then(response => {
         setNine(response.data)
       })
@@ -28,7 +28,7 @@ function App() {
   }
 
   const getUser = () => {
-    axiosWithAuth().get(`/user`)
+    axiosWithAuth().get("https://cameron-mytopnine.herokuapp.com/getuserinfo")
     .then(res => {
       setUser(res.data[0])
     })

@@ -13,9 +13,7 @@ function SignUp() {
                 </div>
               <Form className="field">
                 <Field className="control" type="text" name="username" placeholder="Username"/>
-                <Field className="control" type="text" name="email" placeholder="Email"/>
-                <Field className="control" type="text" name="first_name" placeholder="First Name"/>
-                <Field className="control" type="text" name="last_name" placeholder="Last Name" />
+                <Field className="control" type="text" name="primaryemail" placeholder="Email"/>
                 <Field className="control" type="text" name="password" placeholder="Password"/>
                 <button type="submit" className="signButton">Submit!</button>
               </Form>
@@ -24,12 +22,10 @@ function SignUp() {
 }
 
 const FormikSignUpForm = withFormik({
-    mapPropsToValues({ username, email, first_name, last_name, password}) {
+    mapPropsToValues({ username, email, password}) {
         return {
             username: username || "",
             email: email || "",
-            first_name: first_name || "",
-            last_name: last_name || "",
             password: password || ""
         };
     },
@@ -37,16 +33,10 @@ const FormikSignUpForm = withFormik({
     validationSchema: Yup.object().shape({
         username: Yup.string()
             // .username()
-            .required("Username is required"),
+          .required("Username is required"),
         email: Yup.string()
           .email()
           .required("Email is required"),
-        first_name: Yup.string()
-            // .name()
-            .required("First name is required"),
-        last_name: Yup.string()
-            // .name()
-            .required("Last name is required"),
         password: Yup.string()
           .min(6, "Password must be 6 chararcters or longer")
           .required("Password is required")
@@ -55,7 +45,7 @@ const FormikSignUpForm = withFormik({
         console.log(values);
         
           axiosWithAuth()
-            .post("/user", values)
+            .post("/createnewuser", values)
             .then(res => {
               console.log(res);
               formikBag.props.history.push("/login");
