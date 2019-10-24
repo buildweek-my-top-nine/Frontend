@@ -1,10 +1,11 @@
 import React from "react";
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
+
 function TopNineCard(props) {
 
     axiosWithAuth()
-        .put(`#`)
+        .get(`/topnine/interests`)
         .then(res => console.log(res))
         .catch(err => console.log(err))
 
@@ -14,56 +15,8 @@ function TopNineCard(props) {
         <div className="top-card-container">
             <div className="top-card">
                 <div className="top-info" key={props.id}>
-                    <h2>Name: HTML</h2>
-                    <p>About: blahblahblahblahblah</p>
-                </div>
-            </div>
-            <div className="top-card">
-                <div className="top-info" key={props.id}>
-                    <h2>Name: HTML</h2>
-                    <p>About: blahblahblahblahblah</p>
-                </div>
-            </div>
-            <div className="top-card">
-                <div className="top-info" key={props.id}>
-                    <h2>Name: HTML</h2>
-                    <p>About: blahblahblahblahblah</p>
-                </div>
-            </div>
-            <div className="top-card">
-                <div className="top-info" key={props.id}>
-                    <h2>Name: HTML</h2>
-                    <p>About: blahblahblahblahblah</p>
-                </div>
-            </div>
-            <div className="top-card">
-                <div className="top-info" key={props.id}>
-                    <h2>Name: HTML</h2>
-                    <p>About: blahblahblahblahblah</p>
-                </div>
-            </div>
-            <div className="top-card">
-                <div className="top-info" key={props.id}>
-                    <h2>Name: HTML</h2>
-                    <p>About: blahblahblahblahblah</p>
-                </div>
-            </div>
-            <div className="top-card">
-                <div className="top-info" key={props.id}>
-                    <h2>Name: HTML</h2>
-                    <p>About: blahblahblahblahblah</p>
-                </div>
-            </div>
-            <div className="top-card">
-                <div className="top-info" key={props.id}>
-                    <h2>Name: HTML</h2>
-                    <p>About: blahblahblahblahblah</p>
-                </div>
-            </div>
-            <div className="top-card">
-                <div className="top-info" key={props.id}>
-                    <h2>Name: HTML</h2>
-                    <p>About: blahblahblahblahblah</p>
+                    <h2>Name: {props.interestname}</h2>
+                    <p>About: {props.description}</p>
                 </div>
             </div>
         </div>

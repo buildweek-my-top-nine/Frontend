@@ -22,10 +22,10 @@ function SignUp() {
 }
 
 const FormikSignUpForm = withFormik({
-    mapPropsToValues({ username, email, password}) {
+    mapPropsToValues({ username, primaryemail, password}) {
         return {
             username: username || "",
-            email: email || "",
+            primaryemail: primaryemail || "",
             password: password || ""
         };
     },
@@ -34,7 +34,7 @@ const FormikSignUpForm = withFormik({
         username: Yup.string()
             // .username()
           .required("Username is required"),
-        email: Yup.string()
+        primaryemail: Yup.string()
           .email()
           .required("Email is required"),
         password: Yup.string()

@@ -15,7 +15,7 @@ const AddTop = ({ updateItems }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        axiosWithAuth.post('/topnine/interests/interest/add', items)
+        axiosWithAuth().post('/topnine/catagories/category/add', items)
             .then(res => updateItems(res.data))
             .catch(err => console.log("FAILED POST", err))
         

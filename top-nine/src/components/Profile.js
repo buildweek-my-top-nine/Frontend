@@ -14,8 +14,8 @@ export default function Profile(props) {
             </div>
             <div className="profile-stuff">
                 <img className="dummy-img" src="https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Bob_at_Easel.jpg/220px-Bob_at_Easel.jpg"/>
-                <h3>Username: <span>BRoss</span></h3>
-                <h3>Email: <span>Bob</span></h3>
+                <h3>Username: <span>{props.username}</span></h3>
+                <h3>Email: <span>{props.email}</span></h3>
             </div>
         </div>
         <TopNineCard/>
