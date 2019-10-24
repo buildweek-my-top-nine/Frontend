@@ -1,4 +1,4 @@
 import { createContext } from 'react';
 
-export const JourneyContext = createContext();
+export const TopNineContext = createContext();
 export const UserContext = createContext();

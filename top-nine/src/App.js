@@ -1,29 +1,81 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import { axiosWithAuth } from './utils/axiosWithAuth'
+
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
+
 import SignUp from "./components/SignUp";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import PrivateRoute from './components/PrivateRoute';
 
 import Login from './components/Login';
-import Header from './components/Header';
+import Links from './components/Links';
+import {HomePage} from './components/HomePage';
 import Profile from './components/Profile';
-import Dashboard from './components/Dashboard';
+import { TopNineContext, UserContext } from "./context/TopNineContext";
+
+import './App.css';
 
 function App() {
+
+  const [nine, setNine] = useState([])
+  const [user, setUser] = useState([])
+
+  const getNine = () => {
+    axiosWithAuth()
+      .get(`/user`)
+      .then(response => {
+        setNine(response.data)
+      })
+      .catch(err => console.log(err))
+  }
+
+  const getUser = () => {
+    axiosWithAuth().get(`/user`)
+    .then(res => {
+      setUser(res.data[0])
+    })
+    .catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    getNine()
+    getUser()
+  },[])
+
+  console.log(nine)
+
+
+
   return (
-    <Router>
     <div className="App">
-    <Header/>
+      <TopNineContext.Provider value={{nine}}>
+        <UserContext.Provider value={{user}}>
+          <Route exact path ="/" component={Links} />
+          <Route exact path ="/login" component = {Login} />
+          <Route exact path='/signup' component={SignUp} />
+          <Route exact path='/myprofile' component={Profile} />
+          {/* <Route exact path='/dashboard' component={Dashboard} /> */}
 
-      <Switch>
-      <Route exact path ="/login" component = {Login} />
-      <Route exact path='/signup' component={SignUp} />
-      <Route exact path='/myprofile' component={Profile} />
+          <Route exact path='/homepage' render={props => {
+            const token = localStorage.getItem("token")
+            if(!token){
+              return <Redirect to='/login'/>
+            } else {
+              return <HomePage {...props} getNine={getNine} />
+            }
+          }} />
 
-      <PrivateRoute exact path = 'homepage/dashboard' component = {Dashboard} />
-      </Switch>
+          <Route exact path='/dashboard' render={props => {
+            const token = localStorage.getItem("token")
+            if(!token) {
+              return <Redirect to='/login'/>
+            } else {
+              return <HomePage {...props} getNine={getNine} />
+            }
+          }} />
+
+        </UserContext.Provider>
+      </TopNineContext.Provider>
     </div>
-    </Router>
+
   );
 }
 

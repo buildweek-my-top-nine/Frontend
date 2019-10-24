@@ -14,7 +14,8 @@ function SignUp() {
               <Form className="field">
                 <Field className="control" type="text" name="username" placeholder="Username"/>
                 <Field className="control" type="text" name="email" placeholder="Email"/>
-                <Field className="control" type="text" name="name" placeholder="Name"/>
+                <Field className="control" type="text" name="first_name" placeholder="First Name"/>
+                <Field className="control" type="text" name="last_name" placeholder="Last Name" />
                 <Field className="control" type="text" name="password" placeholder="Password"/>
                 <button type="submit" className="signButton">Submit!</button>
               </Form>
@@ -23,11 +24,12 @@ function SignUp() {
 }
 
 const FormikSignUpForm = withFormik({
-    mapPropsToValues({ username, email, name, password}) {
+    mapPropsToValues({ username, email, first_name, last_name, password}) {
         return {
             username: username || "",
             email: email || "",
-            name: name || "",
+            first_name: first_name || "",
+            last_name: last_name || "",
             password: password || ""
         };
     },
@@ -39,9 +41,12 @@ const FormikSignUpForm = withFormik({
         email: Yup.string()
           .email()
           .required("Email is required"),
-        name: Yup.string()
+        first_name: Yup.string()
             // .name()
-            .required("Name is required"),
+            .required("First name is required"),
+        last_name: Yup.string()
+            // .name()
+            .required("Last name is required"),
         password: Yup.string()
           .min(6, "Password must be 6 chararcters or longer")
           .required("Password is required")
