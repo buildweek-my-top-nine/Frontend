@@ -23,13 +23,13 @@ const TopList = ({ items, updateItems }) => {
     const saveEdit = e => {
         e.preventDefault();
 
-        axiosWithAuth().put(`/topnine/interests/${itemToEdit.id}`, itemToEdit)
-            .then(res => {
+        // axiosWithAuth().put(`/topnine/interests/${itemToEdit.id}`, itemToEdit)
+        //     .then(res => {
                 updateItems(items.map(interestname =>
-                    interestname.interestid === itemToEdit.interestid ? res.data : interestname))
+                    interestname.interestid === itemToEdit.interestid ? itemToEdit : setItemToEdit))
                     setEditing(false)
-            })
-            .catch(err => console.log("PUT FAILED", err))
+            // })
+            // .catch(err => console.log("PUT FAILED", err))
     };
 
     const deleteItem = items => {
