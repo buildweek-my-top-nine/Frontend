@@ -23,11 +23,13 @@ const Login = (props) => {
         e.preventDefault();
 
         axiosWithAuth()
-        .post('https://buildweek--top-nine.herokuapp.com/api/login', credentials)
+        .post('/login', credentials)
         .then(response => {
             console.log(response);
-            localStorage.setItem('token', response.data.payload);
-            props.history.push('/myprofile');
+            localStorage.setItem('token', response.data.session_id);
+            localStorage.setItem('id', response.data.id);
+            console.log(response.data.id);
+            props.history.push('/users');
         })
         .catch(error => {
             console.log(error);
