@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import AddTop from './AddTop';
 import axios from 'axios';
+import "./Dashboard.css";
 
 const initialTop = {
    
@@ -50,9 +51,9 @@ const TopList = ({ items, updateItems, GetData }) => {
 
     return (
         
-        <div>
+        <div className="dash-image">
             
-            <h1>Your Top Nine!</h1>
+            <h1>Top Nine List!</h1>
 
              {/* <ul> */}
                 {items.map(item => (
@@ -60,18 +61,18 @@ const TopList = ({ items, updateItems, GetData }) => {
                     <div 
                     key = {item.interestid} 
                     onClick = {() => editItem(item)}>
-                        <div>
-                        <h3>{item.interestname}</h3>
-                        <p>{item.description}</p>
+                        <div className="indiv-top">
+                            <h3>{item.interestname}</h3>
+                            <p>{item.description}</p>
+                            <span>
+                                <button
+                                    className = "ui red button"
+                                    onClick = {() => deleteItem(item)}>
+                                        DELETE
+                                    </button>{" "}
+                                {item.item}
+                            </span>
                         </div>
-                        <span>
-                            <button
-                                className = "delete"
-                                onClick = {() => deleteItem(item)}>
-                                    DELETE
-                                </button>{" "}
-                            {item.item}
-                        </span>
                         
                 {/* //         <div
                 //             className = "item-box"
@@ -83,41 +84,40 @@ const TopList = ({ items, updateItems, GetData }) => {
             {/* </ul> */}
 
             {editing && (
+                    <form onSubmit = {saveEdit}>
 
-                <form onSubmit = {saveEdit}>
-
-                    <legend>Edit Option</legend>
-                        <label>
-                            Option Name:
-                                <input
-                                    onChange = {e =>
-                                        setItemToEdit({...itemToEdit, 
+                        <legend>Edit Option</legend>
+                            <label>
+                                Option Name:
+                                    <input
+                                        onChange = {e =>
+                                            setItemToEdit({...itemToEdit, 
+                                                
+                                                interestname: e.target.value,
                                             
-                                            interestname: e.target.value,
-                                           
-                                        })
-                                    }
-                                    value = {itemToEdit.interestname}
-                                />
-                        </label> 
+                                            })
+                                        }
+                                        value = {itemToEdit.interestname}
+                                    />
+                            </label> 
 
-                         <label>
-                            About:
-                                <input
-                                    onChange = {e =>
-                                        setItemToEdit({
-                                            ...itemToEdit,
-                                            description: e.target.value})
-                                    }
-                                    value = {itemToEdit.description}
-                                />
-                        </label> 
+                            <label>
+                                About:
+                                    <input
+                                        onChange = {e =>
+                                            setItemToEdit({
+                                                ...itemToEdit,
+                                                description: e.target.value})
+                                        }
+                                        value = {itemToEdit.description}
+                                    />
+                            </label> 
 
-                     <div className = "bottom">
-                        <button type = "submit">Save Changes</button>
-                        <button onClick = {() => setEditing(false)}>Cancel</button>
-                    </div>
-                </form>
+                        <div className = "bottom">
+                            <button type = "submit">Save Changes</button>
+                            <button onClick = {() => setEditing(false)}>Cancel</button>
+                        </div>
+                    </form>
             )} 
             <AddTop updateItems = {updateItems} GetData = {GetData}/>
         </div>

@@ -33,7 +33,7 @@ const AddTop = ({ updateItems, GetData }) => {
     }
 
     return (
-        <form onSubmit = {handleSubmit}>
+        <form className="edit-class" onSubmit = {handleSubmit}>
 
             <h3>Add New Item!</h3>
 

@@ -1,0 +1,46 @@
+.dash-image {
+    background-image: url('../images/signupimg.jpg');
+    padding-bottom: 60px;
+    padding-top: 20px;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.indiv-top {
+    border: 1px solid black;
+    max-width: 500px;
+    margin: 20px auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    background-color: white;
+}
+
+.edit-class {
+    background-color: white;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.edit-class button {
+    max-width: 150px;
+    margin: 0 auto;
+    color: white;
+    background-color: blue;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.edit-class label {
+    text-align: start;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
