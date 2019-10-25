@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-
+import styled from 'styled-components';
 
 
 const AddTop = ({ updateItems, GetData }) => {
@@ -37,7 +37,7 @@ const AddTop = ({ updateItems, GetData }) => {
 
             <h3>Add New Item!</h3>
 
-                <label>
+                <Field>
                     Name of Interest:
 
                     <input
@@ -46,10 +46,10 @@ const AddTop = ({ updateItems, GetData }) => {
                         }
                         value = {items.interestname}
                     />
-                </label>
+                </Field>
 
-                <label>
-                    Desciption of Interest:
+                <Field>
+                    Description of Interest:
 
                     <input
                         onChange = {e =>
@@ -57,11 +57,29 @@ const AddTop = ({ updateItems, GetData }) => {
                         }
                         value = {items.description}
                     />
-                </label>
+                </Field>
 
-            <button type = "submit">Add New Item!</button>
+            <Button type = "submit">Add New Item!</Button>
         </form>
     )
 }
 
 export default AddTop;
+
+
+const Field = styled.label`
+    font-weight: bold;
+    margin-right: 3%;
+    padding-right: 3%;
+`
+
+const Button = styled.button`
+    margin-left: 2%;
+    padding: 1.5%;
+    border-radius: 3px;
+    `
+
+const New = styled.form`
+    margin-top: 3%;
+    margin-bottom: 5%;
+`

@@ -1,0 +1,8 @@
+{
+    "version": 2,
+    "name": "top-nine",
+    "builds": [{ "src": "top-nine/package.json", "use": "@now/static-build", "config": {"distDir": "build"} }],
+    "routes": [
+        { "src": "/(.*)", "dest": "top-nine/$1" }
+    ]
+}

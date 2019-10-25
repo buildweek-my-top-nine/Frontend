@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import AddTop from './AddTop';
 import axios from 'axios';
+import styled from 'styled-components';
 import "./Dashboard.css";
 
 const initialTop = {
@@ -125,3 +126,11 @@ const TopList = ({ items, updateItems, GetData }) => {
 }
 
 export default TopList;
+
+const Card = styled.div`
+    margin-bottom: 2%;
+`
+
+const Delete = styled.button`
+    margin-bottom: 2%;
+`
