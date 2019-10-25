@@ -77,6 +77,8 @@
 
 import React from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import "../Signup.css"
+
 const axios = require('axios');
 const oauth = require('axios-oauth-client');
 
@@ -137,15 +139,15 @@ export default class Login extends React.Component {
   render() {
 
     return (
-
-      <form onSubmit={this.handleSubmit}>
-
-        <input type="text" name="username" value={this.state.username} onChange={this.handleChange} required />
-        <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-        <button>Submit</button>
-
-      </form>
-
+      <div className="sign-container">
+        <div className="sign-up">
+          <form className="field" onSubmit={this.handleSubmit}>
+            <input className="control" type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange} required />
+            <input className="control" type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} required />
+            <button>Submit</button>
+          </form>
+        </div>
+      </div>
     );
 
   }
