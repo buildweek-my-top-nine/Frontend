@@ -34,7 +34,7 @@ const panes = [
       <Menu.Item
         key="episodes"
         as={Nav}
-        to={`/logout`}
+        to={`/`}
         content={logoutLabel}
       />
     )

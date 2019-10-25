@@ -124,8 +124,9 @@ export default class Login extends React.Component {
       })
       .then(res => {
         axiosWithAuth().get('/users/getuserinfo')
-        
-        .then(res => console.log(res))
+            
+            .then(res => localStorage.setItem('userId', res.data.userid))
+            .catch(error => console.log(error))
       })
       .catch(err => console.dir(err));
 

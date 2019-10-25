@@ -14,10 +14,11 @@ const AddTop = ({ updateItems, GetData }) => {
             categoryid: 2
             }
     })
+    const userid = localStorage.getItem("userId");
 
     const handleSubmit = e => {
         e.preventDefault();
-        axiosWithAuth().post('/topnine/interests/interest/add', items)
+        axiosWithAuth().post(`/topnine/interests/interest/add/${userid}`, items)
             .then(res => {
                 console.log(res.data);  
             return GetData()})
