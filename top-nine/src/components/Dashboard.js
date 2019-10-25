@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import "./Dashboard.css";
 
 import TopList from './TopNine';
 
@@ -35,7 +36,7 @@ const Dashboard = () => {
 
     return(
         
-        <div>
+        <div className="dashboard-container">
             {/* {console.log(topNine)} */}
         <TopList items = {topNine} GetData = {GetData} updateItems = {setTopNine} />
       </div>

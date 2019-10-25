@@ -77,6 +77,8 @@
 
 import React from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import "../Signup.css"
+
 const axios = require('axios');
 const oauth = require('axios-oauth-client');
 
